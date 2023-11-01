@@ -53,6 +53,29 @@ def addUserPage():
         restaurants = add_user(array[0], array[1], array[2], array[3], array[4])
     return render_template("addRestaurant.html", result = restaurants)
 
+@app.route("/deleteUser", methods = ["GET", "POST"])
+def deleteUserPage():
+
+    if request.method == "POST":
+        
+        username = request.form["delete user details"]
+        response = deleteUser(username)
+    return render_template("addRestaurant.html", result = response)
+
+def deleteUser(username) :
+    try: 
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM user WHERE username =%s", (username,))
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return "Success"
+    except Exception as e:
+        print(e)
+        cursor.close()
+        conn.close()
+        return "Failed to delete {}".format(username)
 
 def add_user(username, firstname, lastname, email, password):
     try :
@@ -246,21 +269,7 @@ def get_user(username):
         cursor.close() 
         conn.close() 
 
-@app.route('/user/<string:username>', methods = ['DELETE'])
-def deleteUser(username):
-	try:
-		conn = mysql.connect()
-		cursor = conn.cursor()
-		cursor.execute("DELETE FROM user WHERE username =%s", (username,))
-		conn.commit()
-		respone = jsonify('Success')
-		respone.status_code = 200
-		return respone
-	except Exception as e:
-		print(e)
-	finally:
-		cursor.close() 
-		conn.close()
+
           
 
 @app.route("/user/update/<string:username>", methods = ['PUT'])

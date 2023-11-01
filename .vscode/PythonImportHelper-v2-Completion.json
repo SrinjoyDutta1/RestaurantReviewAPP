@@ -1,0 +1,383 @@
+[
+    {
+        "label": "request",
+        "importPath": "urllib",
+        "description": "urllib",
+        "isExtraImport": true,
+        "detail": "urllib",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "flash",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "pymysql",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pymysql",
+        "description": "pymysql",
+        "detail": "pymysql",
+        "documentation": {}
+    },
+    {
+        "label": "mysql",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "MySQL",
+        "importPath": "flaskext.mysql",
+        "description": "flaskext.mysql",
+        "isExtraImport": true,
+        "detail": "flaskext.mysql",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def home():\n    return render_template(\"home.html\")\n@app.route(\"/restaurantList\", methods = [\"GET\", \"POST\"])\ndef restaurantList():\n    zipCode = \"\"\n    if request.method == \"POST\":\n        zipCode = request.form[\"zipCode\"]\n        restaurants = find_restaurant(zipCode)\n        result = json.loads(restaurants.get_data(as_text=True))\n        print(result[1])",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "restaurantList",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def restaurantList():\n    zipCode = \"\"\n    if request.method == \"POST\":\n        zipCode = request.form[\"zipCode\"]\n        restaurants = find_restaurant(zipCode)\n        result = json.loads(restaurants.get_data(as_text=True))\n        print(result[1])\n    return render_template(\"restaurantList.html\", result = result)\n@app.route(\"/addRestaurant\", methods = [\"GET\", \"POST\"])\ndef addingRestaurantPage():",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "addingRestaurantPage",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def addingRestaurantPage():\n    if request.method == \"POST\":\n        fullString = request.form[\"insert restaurant details\"]\n        array = fullString.split(\",\")\n        restaurants = add_restaurant(array[0], array[1], array[2], array[3], array[4], array[5], array[6])\n    return render_template(\"addRestaurant.html\", result = restaurants)\n@app.route(\"/addReview\", methods = [\"GET\", \"POST\"])\ndef addingReviewPage():\n    if request.method == \"POST\":\n        fullString = request.form[\"insert review details\"]",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "addingReviewPage",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def addingReviewPage():\n    if request.method == \"POST\":\n        fullString = request.form[\"insert review details\"]\n        array = fullString.split(\",\")\n        restaurants = add_review(array[0], array[1], array[2], array[3])\n    return render_template(\"addRestaurant.html\", result = restaurants)\n@app.route(\"/addUser\", methods = [\"GET\", \"POST\"])\ndef addUserPage():\n    if request.method == \"POST\":\n        fullString = request.form[\"insert user details\"]",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "addUserPage",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def addUserPage():\n    if request.method == \"POST\":\n        fullString = request.form[\"insert user details\"]\n        array = fullString.split(\",\")\n        restaurants = add_user(array[0], array[1], array[2], array[3], array[4])\n    return render_template(\"addRestaurant.html\", result = restaurants)\n@app.route(\"/deleteUser\", methods = [\"GET\", \"POST\"])\ndef deleteUserPage():\n    if request.method == \"POST\":\n        username = request.form[\"delete user details\"]",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "deleteUserPage",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def deleteUserPage():\n    if request.method == \"POST\":\n        username = request.form[\"delete user details\"]\n        response = deleteUser(username)\n    return render_template(\"addRestaurant.html\", result = response)\ndef deleteUser(username) :\n    try: \n        conn = mysql.connect()\n        cursor = conn.cursor()\n        cursor.execute(\"DELETE FROM user WHERE username =%s\", (username,))",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "deleteUser",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def deleteUser(username) :\n    try: \n        conn = mysql.connect()\n        cursor = conn.cursor()\n        cursor.execute(\"DELETE FROM user WHERE username =%s\", (username,))\n        conn.commit()\n        cursor.close()\n        conn.close()\n        return \"Success\"\n    except Exception as e:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "add_user",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def add_user(username, firstname, lastname, email, password):\n    try :\n        conn = mysql.connect()\n        cursor = conn.cursor(pymysql.cursors.DictCursor)\n        #user = request.get_json()\n        #username = user[\"username\"]\n        #firstname = user[\"firstName\"]\n        #lastname = user[\"lastName\"]\n        #email = user[\"Email\"]\n        #password = user[\"Password\"]",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "add_review",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def add_review(username, restaurantId, rating, textReview):\n    try :\n        conn = mysql.connect()\n        cursor = conn.cursor(pymysql.cursors.DictCursor)\n        #review = request.get_json()\n        #    reviewId = review[\"reviewId\"]\n        #    username = review[\"username\"]\n        #    restaurantId = review[\"restaurantId\"]\n        #    rating = review[\"rating\"]\n        #    textReview = review[\"textReview\"]",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "add_restaurant",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def add_restaurant(name, address, zip, email, phone, website, cuisine):\n    try :\n        conn = mysql.connect()\n        cursor = conn.cursor(pymysql.cursors.DictCursor)\n            #print(\"step2\")\n            #restaurant = request.get_json()\n            #name = restaurant[\"restaurantName\"]\n            #address = restaurant[\"streetAddress\"]\n            #zip = restaurant[\"zipCode\"]\n            #email = restaurant[\"Email\"]",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "get_restaurant",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def get_restaurant(id):\n    try:\n        conn = mysql.connect()\n        cursor = conn.cursor(pymysql.cursors.DictCursor)\n        cursor.execute(\"SELECT restaurantId, restaurantName, streetAddress, zipCode, Email,phoneNumber, website, cuisineType FROM Restaurant WHERE restaurantId =%s\", id)\n        restRow = cursor.fetchone()\n        respone = restRow \n        respone.status_code = 200\n        return respone\n    except Exception as e:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "find_restaurant",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def find_restaurant(zipCode):\n    try:\n        #zipCode = request.args.get(\"zipCode\")\n        conn = mysql.connect()\n        cursor = conn.cursor(pymysql.cursors.DictCursor)\n        cursor.execute(\"SELECT restaurantId, restaurantName, streetAddress, zipCode, Email,phoneNumber, website, cuisineType FROM Restaurant WHERE zipCode =%s\", zipCode)\n        restRow = cursor.fetchall()\n        respone = jsonify(restRow)\n        #respone.status_code = 200\n        return respone",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "delete_Restaurant",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def delete_Restaurant(id):\n\ttry:\n\t\tconn = mysql.connect()\n\t\tcursor = conn.cursor()\n\t\tcursor.execute(\"DELETE FROM restaurant WHERE restaurantid =%s\", (id,))\n\t\tconn.commit()\n\t\trespone = jsonify('Success')\n\t\trespone.status_code = 200\n\t\treturn respone\n\texcept Exception as e:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "updateRestaurant",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def updateRestaurant(id):\n    try :\n        conn = mysql.connect()\n        cursor = conn.cursor(pymysql.cursors.DictCursor)\n        print(\"step1\")\n        if request.is_json:\n            print(\"step2\")\n            restaurant = request.get_json()\n            name = restaurant[\"restaurantName\"]\n            address = restaurant[\"streetAddress\"]",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "get_user",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def get_user(username):\n    try:\n        conn = mysql.connect()\n        cursor = conn.cursor(pymysql.cursors.DictCursor)\n        cursor.execute(\"SELECT username, firstName, lastName, Email, Password FROM User WHERE username = %s\", username)\n        restRow = cursor.fetchone()\n        respone = jsonify(restRow)\n        respone.status_code = 200\n        return respone\n    except Exception as e:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "updateUser",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def updateUser(username):\n    try :\n        conn = mysql.connect()\n        cursor = conn.cursor(pymysql.cursors.DictCursor)\n        if request.is_json:\n            user = request.get_json()\n            fname = user[\"firstName\"]\n            lname = user[\"lastName\"]\n            email = user[\"email\"]\n            pw = user[\"password\"]",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "get_Review",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def get_Review(id):\n    try:\n        conn = mysql.connect()\n        cursor = conn.cursor(pymysql.cursors.DictCursor)\n        cursor.execute(\"SELECT reviewId, username, restaurantId, rating, textReview, dateTime FROM review WHERE reviewId = %s\", id)\n        restRow = cursor.fetchone()\n        respone = jsonify(restRow)\n        respone.status_code = 200\n        return respone\n    except Exception as e:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "deleteReview",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def deleteReview(id):\n\ttry:\n\t\tconn = mysql.connect()\n\t\tcursor = conn.cursor()\n\t\tcursor.execute(\"DELETE FROM review WHERE reviewId =%s\", (id,))\n\t\tconn.commit()\n\t\trespone = jsonify('Success')\n\t\trespone.status_code = 200\n\t\treturn respone\n\texcept Exception as e:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "updateReview",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def updateReview(reviewId):\n    try :\n        conn = mysql.connect()\n        cursor = conn.cursor(pymysql.cursors.DictCursor)\n        if request.is_json:\n            review = request.get_json()\n            rating = review[\"rating\"]\n            textReview = review[\"textReview\"]\n            dateTime = review[\"dateTime\"]\n            sqlQuery = \"update review set rating = %s, textReview = %s, dateTime = %s where reviewId = %s;\"",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app = Flask(__name__)\n@app.route(\"/\", methods = [\"GET\", \"POST\"]) \ndef home():\n    return render_template(\"home.html\")\n@app.route(\"/restaurantList\", methods = [\"GET\", \"POST\"])\ndef restaurantList():\n    zipCode = \"\"\n    if request.method == \"POST\":\n        zipCode = request.form[\"zipCode\"]\n        restaurants = find_restaurant(zipCode)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "\t\tconn",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "\t\tconn = mysql.connect()\n\t\tcursor = conn.cursor()\n\t\tcursor.execute(\"DELETE FROM restaurant WHERE restaurantid =%s\", (id,))\n\t\tconn.commit()\n\t\trespone = jsonify('Success')\n\t\trespone.status_code = 200\n\t\treturn respone\n\texcept Exception as e:\n\t\tprint(e)\n\tfinally:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "\t\tcursor",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "\t\tcursor = conn.cursor()\n\t\tcursor.execute(\"DELETE FROM restaurant WHERE restaurantid =%s\", (id,))\n\t\tconn.commit()\n\t\trespone = jsonify('Success')\n\t\trespone.status_code = 200\n\t\treturn respone\n\texcept Exception as e:\n\t\tprint(e)\n\tfinally:\n\t\tcursor.close() ",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "\t\trespone",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "\t\trespone = jsonify('Success')\n\t\trespone.status_code = 200\n\t\treturn respone\n\texcept Exception as e:\n\t\tprint(e)\n\tfinally:\n\t\tcursor.close() \n\t\tconn.close()\n@app.route(\"/restaurants/<string:id>\", methods = ['PUT'])\ndef updateRestaurant(id):",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "\t\trespone.status_code",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "\t\trespone.status_code = 200\n\t\treturn respone\n\texcept Exception as e:\n\t\tprint(e)\n\tfinally:\n\t\tcursor.close() \n\t\tconn.close()\n@app.route(\"/restaurants/<string:id>\", methods = ['PUT'])\ndef updateRestaurant(id):\n    try :",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "\t\tconn",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "\t\tconn = mysql.connect()\n\t\tcursor = conn.cursor()\n\t\tcursor.execute(\"DELETE FROM review WHERE reviewId =%s\", (id,))\n\t\tconn.commit()\n\t\trespone = jsonify('Success')\n\t\trespone.status_code = 200\n\t\treturn respone\n\texcept Exception as e:\n\t\tprint(e)\n\tfinally:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "\t\tcursor",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "\t\tcursor = conn.cursor()\n\t\tcursor.execute(\"DELETE FROM review WHERE reviewId =%s\", (id,))\n\t\tconn.commit()\n\t\trespone = jsonify('Success')\n\t\trespone.status_code = 200\n\t\treturn respone\n\texcept Exception as e:\n\t\tprint(e)\n\tfinally:\n\t\tcursor.close() ",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "\t\trespone",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "\t\trespone = jsonify('Success')\n\t\trespone.status_code = 200\n\t\treturn respone\n\texcept Exception as e:\n\t\tprint(e)\n\tfinally:\n\t\tcursor.close() \n\t\tconn.close()\n@app.route(\"/review/update/<string:reviewId>\", methods = ['PUT'])\ndef updateReview(reviewId):",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "\t\trespone.status_code",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "\t\trespone.status_code = 200\n\t\treturn respone\n\texcept Exception as e:\n\t\tprint(e)\n\tfinally:\n\t\tcursor.close() \n\t\tconn.close()\n@app.route(\"/review/update/<string:reviewId>\", methods = ['PUT'])\ndef updateReview(reviewId):\n    try :",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "config",
+        "description": "config",
+        "peekOfCode": "app = Flask(__name__)\nmysql = MySQL()\napp.config['MYSQL_DATABASE_USER'] = 'root'\napp.config['MYSQL_DATABASE_PASSWORD'] = 'Neel1123!'\napp.config['MYSQL_DATABASE_DB'] = 'project1CS348'\napp.config['MYSQL_DATABASE_HOST'] = 'localhost'\nmysql.init_app(app)",
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "mysql",
+        "kind": 5,
+        "importPath": "config",
+        "description": "config",
+        "peekOfCode": "mysql = MySQL()\napp.config['MYSQL_DATABASE_USER'] = 'root'\napp.config['MYSQL_DATABASE_PASSWORD'] = 'Neel1123!'\napp.config['MYSQL_DATABASE_DB'] = 'project1CS348'\napp.config['MYSQL_DATABASE_HOST'] = 'localhost'\nmysql.init_app(app)",
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "app.config['MYSQL_DATABASE_USER']",
+        "kind": 5,
+        "importPath": "config",
+        "description": "config",
+        "peekOfCode": "app.config['MYSQL_DATABASE_USER'] = 'root'\napp.config['MYSQL_DATABASE_PASSWORD'] = 'Neel1123!'\napp.config['MYSQL_DATABASE_DB'] = 'project1CS348'\napp.config['MYSQL_DATABASE_HOST'] = 'localhost'\nmysql.init_app(app)",
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "app.config['MYSQL_DATABASE_PASSWORD']",
+        "kind": 5,
+        "importPath": "config",
+        "description": "config",
+        "peekOfCode": "app.config['MYSQL_DATABASE_PASSWORD'] = 'Neel1123!'\napp.config['MYSQL_DATABASE_DB'] = 'project1CS348'\napp.config['MYSQL_DATABASE_HOST'] = 'localhost'\nmysql.init_app(app)",
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "app.config['MYSQL_DATABASE_DB']",
+        "kind": 5,
+        "importPath": "config",
+        "description": "config",
+        "peekOfCode": "app.config['MYSQL_DATABASE_DB'] = 'project1CS348'\napp.config['MYSQL_DATABASE_HOST'] = 'localhost'\nmysql.init_app(app)",
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "app.config['MYSQL_DATABASE_HOST']",
+        "kind": 5,
+        "importPath": "config",
+        "description": "config",
+        "peekOfCode": "app.config['MYSQL_DATABASE_HOST'] = 'localhost'\nmysql.init_app(app)",
+        "detail": "config",
+        "documentation": {}
+    }
+]
