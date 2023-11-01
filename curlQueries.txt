@@ -1,0 +1,44 @@
+This is for Restaurant
+
+curl -X POST http://127.0.0.1:5000/restaurants -i -H "content-type:application/json" -d '{"Email":"srin@gmail.com","cuisineType":"indian","phoneNumber":"4044940302","restaurantId":2,"restaurantName":"restaurant2","streetAddress":"821 northwestern avenue","website":"https:restaurant1.com","zipCode":"47106"}'
+
+
+
+
+curl -X DELETE http://127.0.0.1:5000/restaurants/1 
+
+
+
+
+curl -X PUT http://127.0.0.1:5000/restaurants/2 -i -H "content-type:application/json" -d '{"Email":"srin123@gmail.com","cuisineType":"mexican","phoneNumber":"4044910202","restaurantName":"restaurant5","streetAddress":"82231 northwestern avenue","website":"https:restaurant1.com","zipCode":"47999"}'
+
+
+________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+This is for USer
+
+
+curl -X POST http://127.0.0.1:5000/user -i -H "content-type:application/json" -d '{"username":"san1","firstName":"san","lastName":"sharm","Email": "san@gmail.com","Password":"sanpass"}'
+
+
+curl -X DELETE http://127.0.0.1:5000/user/srind 
+
+
+
+curl -X PUT http://127.0.0.1:5000/user/update/srind -i -H "content-type:application/json" -d '{"firstName":"newNmae","lastName":"newLast","email":"new@gmail.com","password":"newpw"}'
+
+_______________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+
+curl -X POST http://127.0.0.1:5000/review -i -H "content-type:application/json" -d '{"reviewId":"2","username":"srind","restaurantId":"3","rating": "5","textReview":"srinpass", "dateTime": "2023-10-30"}'
+
+
+curl -X DELETE http://127.0.0.1:5000/review/1 
+
+
+curl -X PUT http://127.0.0.1:5000/review/update/2 -i -H "content-type:application/json" -d '{"rating":"4","textReview":"middle","dateTime":"2023-10-30"}'
+
+
+
+
+curl http://127.0.0.1:5000/restaurants?zipCode=11111

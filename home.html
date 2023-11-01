@@ -1,0 +1,35 @@
+<h1>
+    FIND RESTAURANTS
+</h1>
+<form method="POST" action="/restaurantList" >
+  ZIPCODE: <input name="zipCode"/>
+  <br/><br/>
+  <button type="submit">find</button>
+</form>
+<body>
+add a restaurant by inserting in comma seperated like this "name,address,zipCode,email,phone,website,cuisine"
+</body>
+<form method="POST" action="/addRestaurant" >
+    restaurant: <input name="insert restaurant details"/>
+    <br/><br/>
+    <button type="submit">add</button>
+  </form>
+
+<body>
+add a review by inserting in comma seperated like this "username, restaurantId, rating(1-5), textReview"
+</body>
+<form method="POST" action="/addReview" >
+    review: <input name="insert review details"/>
+    <br/><br/>
+    <button type="submit">add</button>
+  </form>
+
+
+<body>
+    add a user by inserting in comma seperated like this "username, firstname, lastname, email, password"
+</body>
+<form method="POST" action="/addUser" >
+    user: <input name="insert user details"/>
+    <br/><br/>
+    <button type="submit">add</button>
+    </form>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+    <h1>
+        list of RESTAURANTS
+    </h1>
+    <table>
+        <thead>
+            <tr>
+                <th>restaurantId</th>
+                <th>restaurantName</th>
+                <th>streetAddress</th>
+                <th>zipCode</th>
+                <th>Email</th>
+                <th>PhoneNumber</th>
+                <th>website</th>
+                <th>cuisineType</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for restaurant in result %}
+                <tr>
+                    <td>{{restaurant.restaurantId}}</td>
+                    <td>{{restaurant.restaurantName}}</td>
+                    <td>{{restaurant.streetAddress}}</td>
+                    <td>{{restaurant.zipCode}}</td>
+                    <td>{{restaurant.Email}}</td>
+                    <td>{{restaurant.phoneNumber}}</td>
+                    <td>{{restaurant.website}}</td>
+                    <td>{{restaurant.cuisineType}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+                
+</html>
